@@ -11,11 +11,30 @@
     <div class="container py-5">
         <h1 class="mb-4">Employees List</h1>
         <p class="text-muted">This is the employees index view.</p>
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+        {{-- @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        @endif --}}
         <p class="text-muted">
         <a href="{{ route('create') }}" class="btn btn-primary btn-sm">Create</a>
 
         </p>
-        
+         <script>
+        function confirmerSuppression(elt){
+            let confirm = confirm("Are you sure to delete this employee?")
+            if(!confirm){
+                return;
+            }
+            elt.
+            
+        }
+    </script>
         <div class="row g-4">
             @foreach ($employees as $employee)
             <div class="col-md-6 col-lg-4">
@@ -36,8 +55,8 @@
                         </ul>
                         <div class="btns">
                             <a href="/employees/{{ $employee['id'] }}" class="btn btn-primary btn-sm">View</a>
-                            <a href="#" class="btn btn-secondary btn-sm">Edit</a>
-                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="{{ route('edit',['id' =>$employee['id'] ]) }}" class="btn btn-secondary btn-sm">Edit</a>
+                            <a href="{{ route('delete',['id' =>$employee['id'] ]) }}" onclick="(e) => confirmerSuppression(e)" class="btn btn-danger btn-sm">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -47,5 +66,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   
 </body>
 </html>

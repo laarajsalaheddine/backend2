@@ -13,31 +13,31 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <form action="/store" method="POST">
+                <form>
                     @csrf
                     <div class="mb-3">
                         <label for="fullName" class="form-label">Full Name:</label>
-                        <input type="text" class="form-control" id="fullName" name="fullName">
+                        <input type="text" class="form-control" id="fullName" name="fullName" value="{{ $employee['fullName'] }}">
                     </div>
 
                     <div class="mb-3">
                         <label for="age" class="form-label">Age:</label>
-                        <input type="number" class="form-control" id="age" name="age">
+                        <input type="number" class="form-control" id="age" name="age" value="{{ $employee['age'] }}">
                     </div>
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email">
+                        <input type="email" class="form-control" id="email" name="email" value="{{ $employee['email'] }}">
                     </div>
 
                     <div class="mb-3">
                         <label for="department" class="form-label">Department:</label>
-                        <input type="text" class="form-control" id="department" name="department">
+                        <input type="text" class="form-control" id="department" name="department" value="{{ $employee['department'] }}">
                     </div>
 
                     <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="isActive" name="isActive">
-                        <label class="form-check-label" for="isActive">Active</label>
+                        <input type="checkbox" class="form-check-input" id="isActive" name="isActive" {{ $employee['isActive'] ? 'checked' : '' }}>
+                        <label class="form-check-label" for="isActive">Active</label>---
                     </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>
