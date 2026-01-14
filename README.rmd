@@ -1,7 +1,8 @@
 # Mon Référentiel de Projet
 
-<details>
-<summary><strong>Aperçu/Overview</strong></summary>
+## Documentation {.tabset .tabset-fade}
+
+### tab Aperçu
 
 ## 📘 Aperçu du Projet
 
@@ -32,12 +33,11 @@ Ce README explique **exactement comment configurer le projet correctement** pour
 - Sessions et cache stockés en tant que fichiers
 - Conçu à des fins d'apprentissage et éducatives
 
-</details>
+### tab Installation
 
-<details>
-<summary><strong>Installation (pour éviter les erreurs)</strong></summary>
+## Installation (pour éviter les erreurs)
 
-### 2️⃣ Installer les dépendances PHP
+### 1️⃣ Installer les dépendances PHP
 
 Assurez-vous que **PHP** et **Composer** sont installés, puis exécutez:
 
@@ -49,7 +49,7 @@ composer install
 
 ---
 
-### 3️⃣ Créer le fichier `.env`
+### 2️⃣ Créer le fichier `.env`
 
 Laravel **ne s'exécutera pas sans un fichier `.env`**.
 
@@ -61,7 +61,7 @@ cp .env.example .env
 
 ---
 
-### 4️⃣ Générer la clé de l'application (OBLIGATOIRE)
+### 3️⃣ Générer la clé de l'application (OBLIGATOIRE)
 
 ⛔ Ignorer cette étape causera une **erreur 500**.
 
@@ -71,7 +71,7 @@ php artisan key:generate
 
 ---
 
-### 5️⃣ Configurer `.env` pour un projet JSON uniquement
+### 4️⃣ Configurer `.env` pour un projet JSON uniquement
 
 Ouvrez le fichier `.env` et **assurez-vous que ces valeurs sont définies**:
 
@@ -94,7 +94,7 @@ DB_CONNECTION=null
 
 ---
 
-### 6️⃣ Effacer tous les caches Laravel (TRÈS IMPORTANT)
+### 5️⃣ Effacer tous les caches Laravel (TRÈS IMPORTANT)
 
 Après avoir édité `.env`, exécutez toujours:
 
@@ -111,7 +111,7 @@ Cela efface:
 
 ---
 
-### 7️⃣ (Facultatif) Vérifier les routes
+### 6️⃣ (Facultatif) Vérifier les routes
 
 ```bash
 php artisan route:list
@@ -121,7 +121,7 @@ Si les routes sont affichées correctement, l'application est saine ✅
 
 ---
 
-### 8️⃣ Exécuter le serveur de développement
+### 7️⃣ Exécuter le serveur de développement
 
 ```bash
 php artisan serve
@@ -173,6 +173,3 @@ php artisan serve
 ---
 
 Bon codage 🚀
-
-</details>
-```
