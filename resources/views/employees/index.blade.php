@@ -31,8 +31,7 @@
             if(!confirm){
                 return;
             }
-            elt.
-            
+            window.location.href = elt.target.href;
         }
     </script>
         <div class="row g-4">
