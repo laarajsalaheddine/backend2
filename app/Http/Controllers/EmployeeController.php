@@ -7,20 +7,21 @@ use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
-    public function ReadJson(){
-        
+    public function ReadJson()
+    {
+
         $file = storage_path('app/public/employees.json');
-        if(!file_exists($file)){
-            return[];
-        }
-        else{
+        if (!file_exists($file)) {
+            return [];
+        } else {
             $json = file_get_contents($file);
-        return json_decode($json, true);
+            return json_decode($json, true);
         }
     }
 
-    public function WriteJson($data){
-        try{
+    public function WriteJson($data)
+    {
+        try {
             $file = storage_path('app/public/employees.json');
             $json = json_encode($data, JSON_PRETTY_PRINT);
             file_put_contents($file, $json);
@@ -30,9 +31,10 @@ class EmployeeController extends Controller
         }
     }
 
-    public function generateId(){
+    public function generateId()
+    {
         $letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        
+
         $id = 'emp_';
         for ($i = 0; $i < 8; $i++) {
             $id .= $letters[rand(0, strlen($letters) - 1)];
@@ -48,47 +50,53 @@ class EmployeeController extends Controller
         $newEmployee['id'] = $this->generateId();
         $newEmployee['fullName'] = $request->input('fullName');
         $newEmployee['email'] = $request->input('email');
-        $newEmployee['age'] = (int)$request->input('age');
+        $newEmployee['age'] = (int) $request->input('age');
         $newEmployee['department'] = strtoupper($request->input('department'));
-        if($request->input('isActive') === 'on')
+        if ($request->input('isActive') === 'on')
             $newEmployee['isActive'] = true;
         else
-        $newEmployee['isActive'] = false;
+            $newEmployee['isActive'] = false;
         $newEmployee['createdAt'] = time();
         $employees[] = $newEmployee;
         $abc = $this->WriteJson($employees);
-        if($abc){
+        if ($abc) {
             return redirect('/employees')->with('success', 'Employee created successfully.');
         } else {
             return redirect('/create');
 
         }
 
-        
-        
-        
-        
+
+
+
+
     }
-    public function edit($id){
-       $employees = $this->ReadJson();
-       foreach($employees as $emp) {
-        if($emp['id']==$id){
-            return view('employees.edit',['employee'=>$emp]);
+    public function edit($id)
+    {
+        $employees = $this->ReadJson();
+        foreach ($employees as $emp) {
+            if ($emp['id'] == $id) {
+                return view('employees.edit', ['employee' => $emp]);
+            }
         }
-       }
     }
 
     public function index()
     {
-        $employees = $this->ReadJson();
+        try {
+            $employees = $this->ReadJson();
+        } catch (\Exception $e) {
+            $employees = [];
+        }
         return view('employees.index', ['employees' => $employees]);
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $employees = $this->ReadJson();
-        foreach($employees as $employee){
-            if($employee['id']==$id){
-                return view('employees.show',['employee'=>$employee]);
+        foreach ($employees as $employee) {
+            if ($employee['id'] == $id) {
+                return view('employees.show', ['employee' => $employee]);
             }
         }
     }
@@ -98,46 +106,48 @@ class EmployeeController extends Controller
         return view('employees.create');
     }
 
-public function update(Request $request, $id)
-{
+    public function update(Request $request, $id)
+    {
         $employees = $this->ReadJson();
         $newEmployee = [];
         $newEmployee['fullName'] = $request->input('fullName');
         $newEmployee['email'] = $request->input('email');
-        $newEmployee['age'] = (int)$request->input('age');
+        $newEmployee['age'] = (int) $request->input('age');
         $newEmployee['department'] = strtoupper($request->input('department'));
-        if($request->input('isActive') === 'on')
+        if ($request->input('isActive') === 'on')
             $newEmployee['isActive'] = true;
         else
-        $newEmployee['isActive'] = false;
+            $newEmployee['isActive'] = false;
         $newEmployee['createdAt'] = time();
-        foreach($employees as $index => $employees) {
-            if($employees['id']==$id){
+        foreach ($employees as $index => $employees) {
+            if ($employees['id'] == $id) {
                 $employees[$index] = $newEmployee;
             }
         }
         $abc = $this->WriteJson($employees);
 
-        if($abc){
+        if ($abc) {
             return redirect('/employees')->with('success', 'Employee created successfully.');
         } else {
             return redirect('/create');
 
 
         }
-           
-        
-        
-        
+
+
+
+
     }
-    public function delete($id){
-        $employees=$this->ReadJson();
-        $newData=[];
-        foreach($employees as $employee){
-            if($employee['id'] != $id){
-                $newData[]=$employee;
+    public function delete($id)
+    {
+        $employees = $this->ReadJson();
+        $newData = [];
+        foreach ($employees as $employee) {
+            if ($employee['id'] != $id) {
+                $newData[] = $employee;
             }
         }
-        
-    }}// fin classe
+
+    }
+}// fin classe
 
