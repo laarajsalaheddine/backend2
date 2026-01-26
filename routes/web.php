@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\Student;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\StudentController;
 
 Route::get(
     '/employees',
@@ -39,3 +41,12 @@ Route::get(
     [EmployeeController::class, 'delete']
 )->name('delete');
 
+
+Route::resource('students', StudentController::class);
+//       /students/
+//       /students/create
+//       /students/store
+//       /students/{id}
+//       /students/{id}/edit
+//       /students/{id}/destroy
+//       students.create ...... route ({{ route('students.create') }})
