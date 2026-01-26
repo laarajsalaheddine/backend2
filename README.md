@@ -1,4 +1,4 @@
-# Mon Référentiel de Projet
+# Référentiel de Projet
 
 <details>
 <summary><strong>Aperçu/Overview</strong></summary>
